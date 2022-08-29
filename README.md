@@ -1,1 +1,1 @@
-# TansinhoBot
+# TwitchBot
