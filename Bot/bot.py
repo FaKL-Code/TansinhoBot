@@ -5,7 +5,7 @@ import irc.bot
 import requests
 import json
 
-
+print("Teste")
 
 file = open("variavelrip.json", "r")
 rip = json.loads(file.read())
