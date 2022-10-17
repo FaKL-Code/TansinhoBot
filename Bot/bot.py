@@ -80,7 +80,8 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
         if e.arguments[0][:1] == '!':
             cmd = e.arguments[0].split(' ')[0][1:]
             print ('Received command: ' + cmd)
-            self.do_command(e, cmd)
+            comando = cmd.upper()
+            self.do_command(e, comando)
         return
 
 # Criar comandos
@@ -89,7 +90,7 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
         c = self.connection
 
         # Achar a API do jogo atual
-        if cmd == "jogo":
+        if cmd == "JOGO":
             url = 'https://api.twitch.tv/kraken/channels/' + self.channel_id
             headers = {'Client-ID': self.client_id, 'Accept': 'application/vnd.twitchtv.v5+json'}
             r = requests.get(url, headers=headers).json()
@@ -97,7 +98,7 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
 
         # Achar a API do titulo atual
 
-        elif cmd == "titulo":
+        elif cmd == "TITULO":
             url = 'https://api.twitch.tv/kraken/channels/' + self.channel_id
             headers = {'Client-ID': self.client_id, 'Accept': 'application/vnd.twitchtv.v5+json'}
             r = requests.get(url, headers=headers).json()
@@ -105,17 +106,13 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
 
     # Comandos somente frase
 
-        elif cmd == "Disney":
-            message = "Alguem avisa pro Matt que ele ta na disney!!!"
-            c.privmsg(self.channel, message)
-
-        elif cmd == "disney":
+        elif cmd == "DISNEY":
             message = "Alguem avisa pro Matt que ele ta na disney!!!"
             c.privmsg(self.channel, message)
 
     # Comandos de contador
 
-        elif cmd == "rip":
+        elif cmd == "RIP":
             global rip
             rip += 1
             message = 'Matt caiu fedendo pela ' + str(rip) + ' vez!!!'
@@ -124,15 +121,7 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
             file = open("variavelrip.json", "w")
             file.write(str(rip))
 
-        elif cmd == "Rip":
-            rip += 1
-            message = 'Matt caiu fedendo pela ' + str(rip) + ' vez!!!'
-
-            c.privmsg(self.channel, message)
-            file = open("variavelrip.json", "w")
-            file.write(str(rip))
-
-        elif cmd == "arroto":
+        elif cmd == "ARROTO":
             global arroto
             arroto += 1
             message = 'O Murillo arrotou pela ' + str(arroto) + ' vez e o Math precisou pedir pra ele parar de novo!'
@@ -140,16 +129,8 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
             c.privmsg(self.channel, message)
             file = open("variavelarroto.json", "w") 
             file.write(str(rip))
-      
-        elif cmd == "Arroto":
-            arroto += 1
-            message = 'O Murillo arrotou pela ' + str(arroto) + ' vez e o Math precisou pedir pra ele parar de novo!'
-
-            c.privmsg(self.channel, message)
-            file = open("variavelarroto.json", "w") 
-            file.write(str(rip))
        
-        elif cmd == "puff":
+        elif cmd == "PUFF":
             global puff
             puff += 1
             message = 'Matt vaporou pela ' + str(puff) + ' vez!!!'
@@ -157,17 +138,8 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
             c.privmsg(self.channel, message)
             file = open("variavelpuff.json", "w")
             file.write(str(puff))
-
-        elif cmd == "Puff":
-            puff += 1
-            message = 'Matt vaporou pela ' + str(puff) + ' vez!!!'
             
-            c.privmsg(self.channel, message)
-            file = open("variavelpuff.json", "w")
-            file.write(str(puff))
-
-        elif cmd == "pinou":
-            global pinou
+        elif cmd == "PINOU":
             pinou += 1
             message = 'Matt acertou tudo menos o inimigo pela ' + str(pinou) + ' vez!'
 
@@ -175,84 +147,31 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
             file = open("variavelpinou.json", "w") 
             file.write(str(pinou))
 
-        elif cmd == "Pinou":
-            pinou += 1
-            message = 'Matt acertou tudo menos o inimigo pela ' + str(pinou) + ' vez!'
-
-            c.privmsg(self.channel, message)
-            file = open("variavelpinou.json", "w") 
-            file.write(str(pinou))
-
-        elif cmd == "dripou":
-            global dripou
+        elif cmd == "DRIPOU":
             dripou += 1
             message = 'Matt reabasteceu o monstro pela ' + str(dripou) + ' vez!'
 
             c.privmsg(self.channel, message) 
             file = open("variaveldripou.json", "w") 
             file.write(str(dripou))
-
-        elif cmd == "Dripou":
-            dripou += 1
-            message = 'Matt reabasteceu o monstro pela ' + str(dripou) + ' vez!'
-
-            c.privmsg(self.channel, message) 
-            file = open("variaveldripou.json", "w") 
-            file.write(str(dripou))
-
-        elif cmd == "agua":
-            global agua
+            
+        elif cmd == "AGUA":
             agua += 1
             message = 'Matt bebeu agua pela ' + str(agua) + ' vez!'
 
             c.privmsg(self.channel, message)
             file = open("variavelagua.json", "w") 
             file.write(str(agua))
-
-        elif cmd == "Agua":
-            agua += 1
-            message = 'Matt bebeu agua pela ' + str(agua) + ' vez!'
-
-            c.privmsg(self.channel, message)
-            file = open("variavelagua.json", "w") 
-            file.write(str(agua))
-
-        elif cmd == "ju":
-            global ju
-            ju += 1
-            message = 'A Ju pistolou pela ' + str(ju) + ' vez!'
-
-            c.privmsg(self.channel, message)
-            file = open("variavelju.json", "w") 
-            file.write(str(ju))
-
-        elif cmd == "Ju":
-            ju += 1
-            message = 'A Ju pistolou pela ' + str(ju) + ' vez!'
-
-            c.privmsg(self.channel, message)
-            file = open("variavelju.json", "w") 
-            file.write(str(ju))
-
-        elif cmd == "murillo":
-            global murillo
+            
+        elif cmd == "MURILLO":
             murillo += 1
             message = 'Murillo quase causou meu ban pela ' + str(murillo) + ' vez!'
 
             c.privmsg(self.channel, message)
             file = open("variavelmurillo.json", "w")
             file.write(str(murillo))
-
-        elif cmd == "Murillo":
-            murillo += 1
-            message = 'Murillo quase causou meu ban pela ' + str(murillo) + ' vez!'
-
-            c.privmsg(self.channel, message)
-            file = open("variavelmurillo.json", "w")
-            file.write(str(murillo))
-
-        elif cmd == "colucci":
-            global colucci
+            
+        elif cmd == "COLUCCI":
             colucci += 1
             message = 'O Colucci foi pra outra dimensao pela ' + str(colucci) + ' vez!'
 
@@ -260,16 +179,7 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
             file = open("variavelcolucci.json", "w") 
             file.write(str(colucci))
 
-        elif cmd == "Colucci":
-            colucci += 1
-            message = 'O Colucci foi pra outra dimensao pela ' + str(colucci) + ' vez!'
-
-            c.privmsg(self.channel, message)
-            file = open("variavelcolucci.json", "w") 
-            file.write(str(colucci))
-
-        elif cmd == "serge":
-            global serge
+        elif cmd == "SERGE":
             serge += 1
             message = 'Serge roubou o loot pela ' + str(serge) + ' vez!'
 
@@ -277,40 +187,15 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
             file = open("variavelserge.json", "w")
             file.write(str(serge))
 
-        elif cmd == "Serge":
-            serge += 1
-            message = 'Serge roubou o loot pela ' + str(serge) + ' vez!'
-
-            c.privmsg(self.channel, message)
-            file = open("variavelserge.json", "w")
-            file.write(str(serge))
-
-        elif cmd == "tsu":
-            global tsu
+        elif cmd == "TSU":
             tsu += 1
             message = 'O Tsu nao entendeu nada que a gente falou pela ' + str(tsu) + ' vez!!!'
 
             c.privmsg(self.channel, message)
             file = open("variaveltsu.json", "w") 
             file.write(str(tsu))
-
-        elif cmd == "Tsu":
-            tsu += 1
-            message = 'O Tsu nao entendeu nada que a gente falou pela ' + str(tsu) + ' vez!!!'
-
-            c.privmsg(self.channel, message)
-            file = open("variaveltsu.json", "w") 
-            file.write(str(tsu))
-
-        elif cmd == "julio":
-            global julio
-            julio += 1
-            message = 'O Julio falou na hora errada pela ' + str(julio) + ' vez!!!'
-            c.privmsg(self.channel, message)
-            file = open("variaveljulio.json", "w")
-            file.write(str(julio))
  
-        elif cmd == "Julio":
+        elif cmd == "JULIO":
             julio += 1
             message = 'O Julio falou na hora errada pela ' + str(julio) + ' vez!!!'
 
@@ -320,17 +205,9 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
         
     # Comandos extras
 
-        elif cmd == "salve":
+        elif cmd == "SALVE":
             message = "HeyGuys"
             c.privmsg(self.channel, message)
-
-        elif cmd == "Salve":
-            message = "HeyGuys"
-            c.privmsg(self.channel, message)
-
-        # Comando nao reconhecido
-
-
 
     # Fim TansinhoBot
 
