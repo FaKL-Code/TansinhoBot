@@ -226,4 +226,4 @@ class TwitchBot(irc.bot.SingleServerIRCBot):
 
     if __name__ == "__main__":
         main()
-
+#a extensao deixa tudo mais facil
